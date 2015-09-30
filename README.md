@@ -15,6 +15,8 @@
   - JS Unit Tests for comparing Browser MSE implementation / Spec ambiguity (relaxing keyframes)
   - media metrics
 - EME will be limitted to https
+  - For cross-origin MSE jump on the proposal now!
+  -   use fetch instead of xhr to get data...
 - BufferZone Jerry!
   - a lot of talk about back buffer
     - showing it to users (quick seek back)
@@ -46,7 +48,17 @@
  
 ### Apple
 - File a radar bug with Apple for feature requests/bugs
-bugreporter.apple.com with developer account
+
+http://www.foms-workshop.org/foms2015SF/pmwiki.php/Site/Schedule
+
+How to reach chrome-media team?
+
+https://crbug.com is your friend | label: Cr-Internals-Media
+https://chromiumdev.slack.com | channel: #media
+How to reach apple?
+
+https://bugreport.apple.com || file a radar: explain why your business needs it with data
+requirement: sign up for a developer ID at https://developer.apple.com
 
 ### Youtube
 - Requires MSE on TVs using YT. Make sure they expose it if you are developing for one of these device's dev tools
