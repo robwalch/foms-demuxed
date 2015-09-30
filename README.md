@@ -48,17 +48,8 @@
  
 ### Apple
 - File a radar bug with Apple for feature requests/bugs
-
-http://www.foms-workshop.org/foms2015SF/pmwiki.php/Site/Schedule
-
-How to reach chrome-media team?
-
-https://crbug.com is your friend | label: Cr-Internals-Media
-https://chromiumdev.slack.com | channel: #media
-How to reach apple?
-
-https://bugreport.apple.com || file a radar: explain why your business needs it with data
-requirement: sign up for a developer ID at https://developer.apple.com
+  - file a radar: explain why your business needs it with data
+  - https://bugreport.apple.com / https://developer.apple.com
 
 ### Youtube
 - Requires MSE on TVs using YT. Make sure they expose it if you are developing for one of these device's dev tools
@@ -67,7 +58,9 @@ requirement: sign up for a developer ID at https://developer.apple.com
 ### Chrome
 - window.chrome has internals for debugging media errors
 - Better "droppedFrames" reporting in 44-45
-- 
+- How to reach chrome-media team?
+  - https://crbug.com is your friend | label: Cr-Internals-Media
+  - https://chromiumdev.slack.com | channel: #media
 
 ### DASH IF
 - Has a collection of DASH test vectors (for members)
