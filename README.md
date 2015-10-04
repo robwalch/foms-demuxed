@@ -1,9 +1,40 @@
 # foms-sf-2015
 ## FOMS notes
 
-### Capabilities Detection Spec
+### JW Player Follow Up Steps
+- Use seek and buffer ranges in html5 provider
+  - support HLS DVR support in Safari
+  - support buffer underflow
+    - remove current timed stall detection
+      - browsers only require a timeupdate event every 350ms
+  - http://www.w3.org/html/wg/drafts/html/master/semantics.html#timeranges
+  - https://github.com/heff/timeranges/blob/master/index.js 
+- HLS.js considerations
+  - fetch API / Streams
+    - find a polyfill (xhr fallback)
+      - We already have promises for handling stream input
+      - Nicer xhr lib than our ajax util https://github.com/raynos/xhr
+    - This will be a core part of superior performance in MSE streaming
+  - Safari and Chromecast can decode TS files with MSE
+    - canplay test?
+    - Other browsers need to transcode MPEG-2 to fmp4
+      - https://github.com/videojs/mux.js
+- Accessibility concerns
+  - WebVTT support https://github.com/mozilla/vtt.js
+  - Descriptions (WebVTT descriptions / audio desctipions tracks or renditions for visually impared)
+  - Aria "tooltips" for describing controls for screenreader
+  - Internationalization
+- Setup timeout occurs on bad network connection
+  - Bad user experience on mobile networks or complex sites
+  - Similar to Power Save error handling: a notification of the current status rather than a fatal error would be a big improvement
+- IE8 support script
+  - provide basic support via polyfills and display:table
 
+### Capabilities Detection Spec
 - beyond canplay?
+- Network API (are we on a mobile network, wifi, no connection or unknown)
+- list codec support
+- framerate capabilities (60fps support)
 
 
 ### MSE / EME
@@ -76,12 +107,17 @@
 ### DASH
 - Shaka uses a nice subset
 - DASH.js is working on a modular refactor
-- 
+
 ### SASH
+- Defined subset of DASH that uses json manifests
+- https://github.com/sfvideo/sash
+- contributors Phil Cluff and Jon Dajl of zencoder
 
 ### HLS
 
-- LIVE / DVR - does it affect buffer ranges?
+- LIVE / DVR - does it affect bufferand seek ranges in HTML5
+  - HTML5 native support for features available in our Flash implementation may be possible
+    - Support tracks and ranges
 - Access video tracks to provide support for multi-audio after loaded metadata
   - Listen to track changes
   - seeking in live streams is there a seekable range in JavaScript?
@@ -98,8 +134,15 @@
 
 ### Codecs
 
-- HDR video!?
+- HDR video 10-bit color channels for HDR capable displays
+  - Not photo HDR or game HDR
+  - Actual display technology that requires new codec support; VP9 Profile 2
+  - UHD/4k 60fps base quality
 
+- Visualizing codec motion vectors is cool
+  - https://github.com/sfvideo/mplayer-debug
+
+### HTML5
 - Browsers only have to fire timeupdate every 350ms
 - Accessability: JW Player needs tabable Aria commented controls
 - User Agent Accessability for keyboard controls
