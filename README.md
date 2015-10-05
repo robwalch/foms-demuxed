@@ -2,7 +2,7 @@
 ## FOMS notes
 
 ### JW Player Follow Up Steps
-- Use seek and buffer ranges in html5 provider
+- Use seek and buffer (and played) ranges in html5 provider
   - support HLS DVR support in Safari
   - support buffer underflow
     - remove current timed stall detection
