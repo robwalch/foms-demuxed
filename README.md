@@ -84,7 +84,6 @@
 
 ### Youtube
 - Requires MSE on TVs using YT. Make sure they expose it if you are developing for one of these device's dev tools
-- 
 
 ### Chrome
 - window.chrome has internals for debugging media errors
