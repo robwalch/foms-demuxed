@@ -4,6 +4,8 @@
 
 https://public.etherpad-mozilla.org/p/FOMS-2017
 
+## 10/03/2017
+
 ### Autoplay Policy
 
 https://public.etherpad-mozilla.org/p/FOMS-2017-autoplay
@@ -91,3 +93,40 @@ https://public.etherpad-mozilla.org/p/FOMS-2017-quality
 
 Abortable Fetch
 https://developers.google.com/web/updates/2017/09/abortable-fetch
+
+## 10/04/2017
+
+### Offline
+
+https://public.etherpad-mozilla.org/p/FOMS-2017-offline
+
+- Ship offline viewing (CBS, Bitmoving, Kaltura - mostly in SDKs, PWA coming or via Shaka)
+  - QoS/QoE and analytics?
+    - pings are queued up by ServiceWorker and sent when online
+    - Types of data useful for offline
+  - Android Chrome
+  - Coming to Safari/iOS (need HLS/media player integration)
+- Shaka supports offline
+  - How do we adopt it?
+  - What if the media uses DRM?
+    - EME for offline is missing in browsers
+      - Widevine/Clearkey encrypted coming in M62 of Android Chrome
+      - Need to check with Mozilla and with Apple in Safari Tech Preview
+  - Which media source is best suited for offline (CBS)
+    - Single bitrate to avoid ABR behavior and requiring all qualities to be delivered
+    - A good case for HEVC/VP9 at 250kbps is watchable
+  - In PWA _only_ vs on page (Bitmovin)
+    - https only
+    - ServiceWorker registered for a single origin?
+      - Will media and script CDN and origin need to match?
+- Network offline
+  - navigator.onLine: true (everybody - inconsistent across browsers - poll vs listen for event)
+  - navigator.connection (Chrome desktop and Android only)
+    - downlink: 0.2
+    - effectiveType: "4g"
+    - onchange: null
+    - rtt: 100
+- Background fetch
+  - In Chrome Canary (Kaltura w/ Shaka)
+  - In Shaka PWA demo https://github.com/google/shaka-player/issues/879
+- Prefetch for faster start (not offline) assuming there is a high probability user will watch it next
