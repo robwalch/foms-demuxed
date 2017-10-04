@@ -174,3 +174,60 @@ interface MediaCapabilitiesInfo {
   - supported, smooth and powerEfficient will get better over time
 - Ship behind a flag in 63 (hopefully in the next two weeks)
 - Available with [runtime enabled feature](https://www.chromium.org/blink/runtime-enabled-features) something like `--enable-blink-features=media-capabilities`
+
+### Mobile Web
+
+https://public.etherpad-mozilla.org/p/FOMS-2017-Mobile-Web
+
+- Chrome is looking for feedback on going from Native Apps to Web or back
+  - Vimeo supports both Native Apps and Mobile Web
+    - Usage and development of the app is very different than the mobile site
+     - User base vs. number of views per month can be very different between the two, but both use cases have value
+     - Ex: Privacy may not be as much of an issue in a native app
+- Cheaper user acquisition for web app
+  - Youtube has both; mobile site can load and start video playback faster than the Youtube app
+  - NYT has several native apps and PWA experiments
+- Not having Fairplay available on iOS Safari requires a Native App for DRM content consumption
+- Android 4.4+ has Chrome
+- older Android phones are still out in the wild and need to be addressed in some markets
+- PWA progressive web apps
+  - Add to homescreen
+  - Offline mode
+  - ServiceWorker Background Fetch
+- Can also be used to improve start time
+- Progress monitoring of fetch is coming soon
+  - Push Notifications
+  - http://bit.ly/pwa-media (https://biograf-155113.appspot.com/)
+  - http://bit.ly/pwa-media-code
+  - Dale Curtis has put a lot of work into these features
+  - John Pallett happy to talk more about what PWAs can do
+  - Pages added to the homescreen are allowed to autoplay
+  - Muted autoplay is always allowed
+- AMP is still around and being improved
+- Data Saver Metadata attribute?
+- GPU decoder to Canvas for 360 may not happen for DRM
+- might require a new feature on media elements or CSS transforms
+- secure textures not secure enough
+- MSE on iOS: file a radar
+- request device lock
+- iOS screen could lock (sleep) if video is stalled for a certain amount of time
+- Should not happen with correct conditions (audio, looping...)
+- Firefox on Android runs video decoder out of process to recover from failures
+- Battery and Data consumption is a concern
+- data saving mode - "metered" connection
+- Chrome data saving proxy compresses data (page, image, video)  sent to Chrome
+- How can the developers determine this is active?
+- Yes with "save-data" http header
+- Can we show which sites use more data?
+Detecting when device is data-sensitive:
+http://wicg.github.io/netinfo/
+https://developers.google.com/web/updates/2016/02/save-data
+https://developer.chrome.com/multidevice/data-compression
+- Can we bet on PWAs? 
+- Should there be an "PWApp Store" or is that search? Bing adds PWAs it finds into the Windows App Store
+- They are not meant to replace a native app (at least not in all cases, e.g. app requires APIs that aren't avaliable on web)
+- oncue event is not fired in some versions of Android with native HLS playback (A: don't use native player to play HLS in Chrome Android)
+  - HLS with fragmented MP4 is the way to go on Android using MSE. Not native player.
+- Can you add a PWA from a Chrome webview (Facebook webview)?
+- ServiceWorkers are in development in WebKit https://webkit.org/status/#specification-service-workers
+
