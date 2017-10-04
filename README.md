@@ -112,16 +112,17 @@ https://public.etherpad-mozilla.org/p/FOMS-2017-offline
     - EME for offline is missing in browsers
       - Widevine/Clearkey encrypted coming in M62 of Android Chrome
       - Need to check with Mozilla and with Apple in Safari Tech Preview
-  - Which media source is best suited for offline (CBS)
-    - Single bitrate to avoid ABR behavior and requiring all qualities to be delivered
-    - A good case for HEVC/VP9 at 250kbps is watchable
-  - In PWA _only_ vs on page (Bitmovin)
-    - https only
-    - ServiceWorker registered for a single origin?
+- Which media source is best suited for offline (CBS)
+  - Single bitrate to avoid ABR behavior and requiring all qualities to be delivered
+  - A good case for HEVC/VP9 at 250kbps is watchable
+- In PWA _only_ vs on page (Bitmovin)
+  - https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API
+  - https only
+  - ServiceWorker registered for a single origin?
       - Will media and script CDN and origin need to match?
 - Network offline
   - navigator.onLine: true (everybody - inconsistent across browsers - poll vs listen for event)
-  - navigator.connection (Chrome desktop and Android only)
+  - navigator.connection (Chrome desktop and Android only) https://developer.mozilla.org/en-US/docs/Web/API/Network_Information_API
     - downlink: 0.2
     - effectiveType: "4g"
     - onchange: null
