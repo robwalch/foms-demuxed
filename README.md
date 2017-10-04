@@ -127,6 +127,7 @@ https://public.etherpad-mozilla.org/p/FOMS-2017-offline
     - effectiveType: "4g"
     - onchange: null
     - rtt: 100
+  - connection.metered (not well supported) https://developer.mozilla.org/en-US/docs/Web/API/Connection/metered
 - Background fetch
   - In Chrome Canary (Kaltura w/ Shaka)
   - In Shaka PWA demo https://github.com/google/shaka-player/issues/879
