@@ -132,3 +132,45 @@ https://public.etherpad-mozilla.org/p/FOMS-2017-offline
   - In Chrome Canary (Kaltura w/ Shaka)
   - In Shaka PWA demo https://github.com/google/shaka-player/issues/879
 - Prefetch for faster start (not offline) assuming there is a high probability user will watch it next
+
+### MediaCapabilities
+
+https://public.etherpad-mozilla.org/p/FOMS-2017-mediaCapabilites-QoE
+
+- Allow improved selection of media sources by supplying information about whether configuration can be played, well and efficiently
+- Will use hardware decoding? Not going to happen
+  - Avoid renditions that will run on software because of size < 320p
+    - These renditions will not leverage DRM properly
+    - Video and player rendering problems switching from SW to HW
+  - Avoid renditions that are too large (efficiency)
+- VP9 new codec string is verbose enough to include color information
+  - MIME type "media profile" (not exactly codec profile) attribute not allowed (mp4/video profile=high)
+- MediaCapabilities takes JSON object which essentially is the contents of the MOV atom
+Input `decodingInfo({media decoding configuration})`
+```
+dictionary VideoConfiguration {
+  required DOMString contentType;
+  required unsigned long width;
+  required unsigned long height;
+  required unsigned long bitrate;
+  required double framerate;
+};
+dictionary AudioConfiguration {
+  required DOMString contentType;
+  DOMString channels;
+  unsigned long bitrate;
+  unsigned long samplerate;
+};
+```
+Output
+```
+interface MediaCapabilitiesInfo {
+  readonly attribute boolean supported;
+  readonly attribute boolean smooth;
+  readonly attribute boolean powerEfficient;
+};
+```
+- Chrome will evaluate each playback to create a model of how well devices support media configurations
+  - supported, smooth and powerEfficient will get better over time
+- Ship behind a flag in 63 (hopefully in the next two weeks)
+- Available with [runtime enabled feature](https://www.chromium.org/blink/runtime-enabled-features) something like `--enable-blink-features=media-capabilities`
