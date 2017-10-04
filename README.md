@@ -87,3 +87,7 @@ https://public.etherpad-mozilla.org/p/FOMS-2017-quality
   - JS
 - Use server and client time - have to use both to find "best" range
 
+### Misc
+
+Abortable Fetch
+https://developers.google.com/web/updates/2017/09/abortable-fetch
