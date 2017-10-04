@@ -1,4 +1,4 @@
-# foms-demuxed 2017
+# FOMS/Demuxed San Francisco 2017
 
 ## FOMS notes
 
@@ -9,46 +9,46 @@ https://public.etherpad-mozilla.org/p/FOMS-2017
 https://public.etherpad-mozilla.org/p/FOMS-2017-autoplay
 
 - Reasons a play promise is rejected
-user gesture required, load called, pause called
+  1. user gesture required
+  2. load called
+  3. pause called
 
-Promise rejection error stack trace
+- Promise rejection error stack trace ?
 
 - Result of play promise rejected
-video.paused = true
-video events 'playing' -> 'paused' ensure we go into a paused state
+  - video.paused = true
+  - Safari fires video events 'playing' then 'paused' ensure we go into a paused state
+  - Chrome does not (appearently we were always paused, but don't count on paused state)
 
 - Bad states
-preload impacts this behavior?
+  - preload impacts this behavior?
 
 - Priming the video tag
-.load() on window.event
-.src = / .srcObject
-.play() -> video.paused = false (OK in older iOS - don't count on it in Chrome)
+  - .load() on window.event
+  - .src = / .srcObject
+  - .play() -> video.paused = false (OK in older iOS - don't count on it in Chrome)
 
 - How do we determine if we're in a user gesture event when api.play() is called?
 
 - Can we get this requirement before trying?
+  - canplay(type)
+  - canAutoplay(NOW?) -> "maybe"
 
-canplay(type)
+- disable audio tracks instead of mute = true to turn off audio decoders
 
-canAutoplay(NOW?) -> "maybe"
-
-disable audio tracks instead of mute = true to turn off audio decoders
-
-Apple
-iOS
+#### iOS
 - muted autoplay allowed
 - consent for audio on a page
 - one video tag at a time
 - What if you unmuted programmatically (pauses)
 
-Safari 11
+#### Safari 11
 - Per frame (not video element)
 - no iFrame policy
 - configurable per domain (autoplay and autoplay muted)
 - autoplay=true muted video pauses offscreen (not video started by calling .play())
 
-Chrome 64
+#### Chrome 64
 - muted autoplay allowed (even in iFrame)
 - click required on origin (tab session)
 - 7 seconds with video and audio larger than a certain size is meaningful media interaction (Desktop)
