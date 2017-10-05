@@ -132,7 +132,7 @@ https://public.etherpad-mozilla.org/p/FOMS-2017-offline
   - In Chrome Canary (Kaltura w/ Shaka)
   - In Shaka PWA demo https://github.com/google/shaka-player/issues/879
 - Prefetch for faster start (not offline) assuming there is a high probability user will watch it next
-
+ 
 ### MediaCapabilities
 
 https://public.etherpad-mozilla.org/p/FOMS-2017-mediaCapabilites-QoE
@@ -175,9 +175,40 @@ interface MediaCapabilitiesInfo {
 - Ship behind a flag in 63 (hopefully in the next two weeks)
 - Available with [runtime enabled feature](https://www.chromium.org/blink/runtime-enabled-features) something like `--enable-blink-features=media-capabilities`
 
+### QoE
+
+https://public.etherpad-mozilla.org/p/FOMS-2017-QoE-Implementation
+
+- Standard Video and Player Performance Metrics
+  - "Session" event graph (Rob could write a block post)
+    - Page View / Player View / Video View
+    - Show state machine -> Page, Embed, Play, Page Unload (Abandonment)
+    - How do you explain when things are not 1-1 (request - response/error/abandonment)?
+  - % of views that have rebuffering
+    - average amount time rebuffering per view
+- Break down startup time
+  - page load, player setup, preload preload, play requested, media requested
+- Race ad preroll vs video - use whichever is fastest
+- tracking "canstart" vs "playing" vs "timeupdate" > 0
+- Bitrate, Resolution - impacted by speed?
+- Upscaling for quality
+- Downscaling for cost
+- Track user selecting quality from (and to) using ABR (pick 1080p, or back to auto, or low)
+- "waiting" is a reliable way to determine ready state changing to a value lower than HAVE_FUTURE_DATA
+  - The player is in a "playing" (not .paused) state but cannot continue
+  - It can fire before playback indicating playback is not immediate
+  - Firing after playback has started indicates a risk of underbuffering
+- Performance Timing and Observer
+  - Time to meaningful paint... time to play?
+  - longtask tells you when JS ran for over 50ms... how about App suspended?
+- Browser App suspended
+  - No API
+  - "Heartbeat" JS intervals or requestAnimationFrame is used to detect browser suspension
+ 
 ### Mobile Web
 
 https://public.etherpad-mozilla.org/p/FOMS-2017-Mobile-Web
+Mobile Web
 
 - Chrome is looking for feedback on going from Native Apps to Web or back
   - Vimeo supports both Native Apps and Mobile Web
@@ -189,13 +220,13 @@ https://public.etherpad-mozilla.org/p/FOMS-2017-Mobile-Web
   - NYT has several native apps and PWA experiments
 - Not having Fairplay available on iOS Safari requires a Native App for DRM content consumption
 - Android 4.4+ has Chrome
-- older Android phones are still out in the wild and need to be addressed in some markets
+  - older Android phones are still out in the wild and need to be addressed in some markets
 - PWA progressive web apps
   - Add to homescreen
   - Offline mode
   - ServiceWorker Background Fetch
-- Can also be used to improve start time
-- Progress monitoring of fetch is coming soon
+    - Can also be used to improve start time
+    - Progress monitoring of fetch is coming soon
   - Push Notifications
   - http://bit.ly/pwa-media (https://biograf-155113.appspot.com/)
   - http://bit.ly/pwa-media-code
@@ -204,28 +235,27 @@ https://public.etherpad-mozilla.org/p/FOMS-2017-Mobile-Web
   - Pages added to the homescreen are allowed to autoplay
   - Muted autoplay is always allowed
 - AMP is still around and being improved
-- Data Saver Metadata attribute?
 - GPU decoder to Canvas for 360 may not happen for DRM
-- might require a new feature on media elements or CSS transforms
-- secure textures not secure enough
+  - might require a new feature on media elements or CSS transforms
+  - secure textures not secure enough
 - MSE on iOS: file a radar
 - request device lock
 - iOS screen could lock (sleep) if video is stalled for a certain amount of time
-- Should not happen with correct conditions (audio, looping...)
+  - Should not happen with correct conditions (audio, looping...)
 - Firefox on Android runs video decoder out of process to recover from failures
 - Battery and Data consumption is a concern
-- data saving mode - "metered" connection
-- Chrome data saving proxy compresses data (page, image, video)  sent to Chrome
-- How can the developers determine this is active?
-- Yes with "save-data" http header
+  - data saving mode - "metered" connection
+  - Chrome data saving proxy compresses data (page, image, video)  sent to Chrome
+    - How can the developers determine this is active?
+      - Yes with "save-data" http header
 - Can we show which sites use more data?
-Detecting when device is data-sensitive:
-http://wicg.github.io/netinfo/
-https://developers.google.com/web/updates/2016/02/save-data
-https://developer.chrome.com/multidevice/data-compression
+  Detecting when device is data-sensitive:
+    http://wicg.github.io/netinfo/
+    https://developers.google.com/web/updates/2016/02/save-data
+    https://developer.chrome.com/multidevice/data-compression
 - Can we bet on PWAs? 
-- Should there be an "PWApp Store" or is that search? Bing adds PWAs it finds into the Windows App Store
-- They are not meant to replace a native app (at least not in all cases, e.g. app requires APIs that aren't avaliable on web)
+  - Should there be an "PWApp Store" or is that search? Bing adds PWAs it finds into the Windows App Store
+  - They are not meant to replace a native app (at least not in all cases, e.g. app requires APIs that aren't avaliable on web)
 - oncue event is not fired in some versions of Android with native HLS playback (A: don't use native player to play HLS in Chrome Android)
   - HLS with fragmented MP4 is the way to go on Android using MSE. Not native player.
 - Can you add a PWA from a Chrome webview (Facebook webview)?
