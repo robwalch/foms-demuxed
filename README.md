@@ -208,7 +208,6 @@ https://public.etherpad-mozilla.org/p/FOMS-2017-QoE-Implementation
 ### Mobile Web
 
 https://public.etherpad-mozilla.org/p/FOMS-2017-Mobile-Web
-Mobile Web
 
 - Chrome is looking for feedback on going from Native Apps to Web or back
   - Vimeo supports both Native Apps and Mobile Web
@@ -221,43 +220,59 @@ Mobile Web
 - Not having Fairplay available on iOS Safari requires a Native App for DRM content consumption
 - Android 4.4+ has Chrome
   - older Android phones are still out in the wild and need to be addressed in some markets
-- PWA progressive web apps
+__PWAs: Progressive Web Apps__
+ - Done right, your mobile site becomes as good as a native app!
   - Add to homescreen
   - Offline mode
-  - ServiceWorker Background Fetch
-    - Can also be used to improve start time
-    - Progress monitoring of fetch is coming soon
+    - ServiceWorker Background Fetch
+      - Can also be used to improve start time
+      - Progress monitoring of fetch is coming soon
   - Push Notifications
-  - http://bit.ly/pwa-media (https://biograf-155113.appspot.com/)
+- PWA Demos:
+  - http://bit.ly/pwa-media
   - http://bit.ly/pwa-media-code
   - Dale Curtis has put a lot of work into these features
   - John Pallett happy to talk more about what PWAs can do
+- Chrome dev summit later this month
+- Features enabled by PWAs
   - Pages added to the homescreen are allowed to autoplay
-  - Muted autoplay is always allowed
-- AMP is still around and being improved
+- Muted autoplay is always allowed on Chrome Android and Safari iOS now
+
+__AMP: Accelerated Mobile Pages Project is still around and being improved__
+
 - GPU decoder to Canvas for 360 may not happen for DRM
   - might require a new feature on media elements or CSS transforms
   - secure textures not secure enough
+
 - MSE on iOS: file a radar
-- request device lock
+
+- request device lock (There's an API for this)
 - iOS screen could lock (sleep) if video is stalled for a certain amount of time
   - Should not happen with correct conditions (audio, looping...)
+
 - Firefox on Android runs video decoder out of process to recover from failures
-- Battery and Data consumption is a concern
-  - data saving mode - "metered" connection
-  - Chrome data saving proxy compresses data (page, image, video)  sent to Chrome
-    - How can the developers determine this is active?
-      - Yes with "save-data" http header
-- Can we show which sites use more data?
+
+__Battery and Data consumption is a concern__
+- data saving mode - "metered" connection
+- Chrome data saving proxy compresses data (page, image, video)  sent to Chrome
+  - How can the developers determine this is active?
+    - Yes with "save-data" http header
   Detecting when device is data-sensitive:
     http://wicg.github.io/netinfo/
     https://developers.google.com/web/updates/2016/02/save-data
     https://developer.chrome.com/multidevice/data-compression
+  - Can we show which sites use more data?
+    - Think "battery settings" screen usage by app, but for data by origin
+
+__Support__
 - Can we bet on PWAs? 
   - Should there be an "PWApp Store" or is that search? Bing adds PWAs it finds into the Windows App Store
   - They are not meant to replace a native app (at least not in all cases, e.g. app requires APIs that aren't avaliable on web)
-- oncue event is not fired in some versions of Android with native HLS playback (A: don't use native player to play HLS in Chrome Android)
-  - HLS with fragmented MP4 is the way to go on Android using MSE. Not native player.
-- Can you add a PWA from a Chrome webview (Facebook webview)?
 - ServiceWorkers are in development in WebKit https://webkit.org/status/#specification-service-workers
+
+- Bug: oncue event is not fired in some versions of Android with native HLS playback (A: don't use native player to play HLS in Chrome Android)
+  - HLS with fragmented MP4 is the way to go on Android using MSE. Not native player.
+
+- Can you add a PWA from a webview (Facebook webview)?
+  - Not so much. You can from a Chrome Panel
 
