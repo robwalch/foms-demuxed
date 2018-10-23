@@ -65,7 +65,7 @@
 - Profile performance by \<script\>
 
 ### Breakouts
-- Infrastructure
+### Infrastructure
 	- RTMP as a standard / in the browser for injection
 	    - getUserMedia -> WebRTC
 	    - Just send CMAF GoP on whatever transport
@@ -78,7 +78,7 @@
 	    - Comparing to Player analytics
         - Standard for media streaming logs
         
-- Player Capabilities
+### Player Capabilities
     - What is the current frame? Same as last time polled?
     - Fullscreen issues
         - Changing context of video tag while staying in fullscreen
@@ -92,7 +92,7 @@
     - Video Tag Events
         - MediaError.message concat high level message (HTML5MediaElement WY spec)
         
-- Media Capabilities
+### Media Capabilities
     - In 3 browsers (C, F, S) https://developer.mozilla.org/en-US/docs/Web/API/Media_Capabilities_API
         - No Edge
     - Limit adaptation switching based on decoder capabilities API
@@ -106,7 +106,7 @@
 
 ## FOMS Day 2 - 10/16/2018
 
-- Player Profiling
+### Player Profiling
     Examples:
         - MUX bot-watcher: Spin-up a player and run tests
             - https://github.com/muxinc/bot-watcher
@@ -181,7 +181,7 @@
     - Throttle CPu, limit memory available, throttle or replay network conditions (ACTION)
     - Speak with folks who are interested Flavio and Matt MMCC... Who would like to drive this as an open-source project?
 
-- Frame accuracy
+### Frame accuracy
     - Firefox can provide frame timestamp (behind a flag)
     - WebGL Extension to provide information about which frame is being sent to the renderer
     - Presumed framerate? VideoQuality API?
@@ -195,7 +195,7 @@
     - W3C issue https://github.com/w3c/media-and-entertainment/issues/4
     - Browser test https://daiz.github.io/frame-accurate-ish/
 
-- Autoplay
+### Autoplay
     - breaking features or websites
         - Can a dialog be opened before putting policies like this into effect
             - Chrome WCG Intervention
