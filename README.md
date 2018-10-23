@@ -2,7 +2,7 @@
 
 ## FOMS Day 1 - 10/15/2018
 
-** Rob Walch: Position Statement **
+**Rob Walch: Position Statement**
 - Performance metrics, QoE
 - Crossbrowser web player streaming solutions
 - Less work to play video
@@ -220,9 +220,9 @@
     
     
 **Tooling**
-    - Devtools link from video element to media-internals
-        - File an issue with Chrome (CR bug): internal-media
-        - Chrome trace - filter "media" label
+- Devtools link from video element to media-internals
+    - File an issue with Chrome (CR bug): internal-media
+    - Chrome trace - filter "media" label
 
 ## demuxed
 
