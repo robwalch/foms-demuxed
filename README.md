@@ -205,18 +205,18 @@
         - Safari can use it as a signal to not play/pause
         - Maybe not for WebAudio and Text-to-Speech 
 
-Notes:
-    - play() Promise support in Edge?
-    - Safari calls play() pause() (They would use any canAutoplay test to prevent this behavior)
-    - Firefox will show a notification for sites that want to autoplay
-        - This may be triggered by autoplay test
-    - UserActivation API - expose a boolean for inUserActivation
-    - Need a clock/timer for active application time
-        - exclude timing when device/browser is locked - something better than heartbeat
-    - calling load() on userGesture by checking global.event in player logic sucks
-    - When you use the autoplay attribute:
-        - Safari and Chrome will autopause when the video is scrolled offscreen (not removed from the DOM!)
-    - Confirmation of getUserMedia() enables autoplay on Safari (will in Chrome 71)
+**Notes**
+- play() Promise support in Edge?
+- Safari calls `play()` and `pause()` (They would use any canAutoplay test to prevent this behavior)
+- Firefox will show a notification for sites that want to autoplay
+    - This may be triggered by autoplay test
+- UserActivation API - expose a boolean for inUserActivation
+- Need a clock/timer for active application time
+    - exclude timing when device/browser is locked - something better than heartbeat
+- calling load() on userGesture by checking global.event in player logic sucks
+- When you use the autoplay attribute:
+    - Safari and Chrome will autopause when the video is scrolled offscreen (not removed from the DOM!)
+- Confirmation of getUserMedia() enables autoplay on Safari (will in Chrome 71)
     
     
 **Tooling**
@@ -229,15 +229,14 @@ Notes:
 ### 10/17-18/2018
 
 - tensorflow can be configuration language, more than a tool used for ML
-
-	- specify
-	- unify
-	- tensorfy
+  - specify
+  - unify
+  - tensorfy
 
 - bandwidth estimation is hosed with segment requests
-	(see Will Law's talk)
+  (see Will Law's talk)
 
 - User's may not want to pay for quality at every second of playback
-	(don't try so hard to upswitch with users who don't make manual selections)
+  (don't try so hard to upswitch with users who don't make manual selections)
 
 - Did the user make a manual selection? They either care about quality, or their data plan.
