@@ -66,80 +66,80 @@
 
 ### Breakouts
 ### Infrastructure
-	- RTMP as a standard / in the browser for injection
-	    - getUserMedia -> WebRTC
-	    - Just send CMAF GoP on whatever transport
-	    - Could SRT replace RTMP on the inject side? point-to-point
-	- Fallback rendition switching
-	    - Use channels with ITF to make changes to the draft
-	    - Rerequest master manifest
-	        - Copy minimum update period from DASH
-	- Working with CDN logs
-	    - Comparing to Player analytics
-        - Standard for media streaming logs
+- RTMP as a standard / in the browser for injection
+    - getUserMedia -> WebRTC
+    - Just send CMAF GoP on whatever transport
+    - Could SRT replace RTMP on the inject side? point-to-point
+- Fallback rendition switching
+    - Use channels with ITF to make changes to the draft
+    - Rerequest master manifest
+	- Copy minimum update period from DASH
+- Working with CDN logs
+    - Comparing to Player analytics
+- Standard for media streaming logs
         
 ### Player Capabilities
-    - What is the current frame? Same as last time polled?
-    - Fullscreen issues
-        - Changing context of video tag while staying in fullscreen
-        - Captions list when textTracks change
-        - When is the animation ended going to fullscreen
-        - Use VideoQuality API to report on framerate etc...
-        - PIP API coming to Chrome
-    - Service Workers
-        - Apple needs to figure out range-requests made to ServiceWorkers for usage with HLS
+- What is the current frame? Same as last time polled?
+- Fullscreen issues
+	- Changing context of video tag while staying in fullscreen
+	- Captions list when textTracks change
+	- When is the animation ended going to fullscreen
+	- Use VideoQuality API to report on framerate etc...
+	- PIP API coming to Chrome
+- Service Workers
+	- Apple needs to figure out range-requests made to ServiceWorkers for usage with HLS
 	    - "crossorigin" withCredentials requests : Talk to Youenn Fablet, See https://github.com/jwplayer/jwplayer/issues/3056
     - Video Tag Events
         - MediaError.message concat high level message (HTML5MediaElement WY spec)
         
 ### Media Capabilities
-    - In 3 browsers (C, F, S) https://developer.mozilla.org/en-US/docs/Web/API/Media_Capabilities_API
-        - No Edge
-    - Limit adaptation switching based on decoder capabilities API
-        - Lower rebuffer rate an start time
-        - Only small decrease in quality
-        - Less bytes over the network
-        - Longer battery life
-    - VP9 uses a less performant decoder
-        - Impacts battery life on mobile devices, and CPU on desktop (fans spinning)
-    - video source elements can include a mimetype which is good because the browser doesn't have to sniff the mimetype
+- In 3 browsers (C, F, S) https://developer.mozilla.org/en-US/docs/Web/API/Media_Capabilities_API
+	- No Edge
+- Limit adaptation switching based on decoder capabilities API
+	- Lower rebuffer rate an start time
+	- Only small decrease in quality
+	- Less bytes over the network
+	- Longer battery life
+- VP9 uses a less performant decoder
+	- Impacts battery life on mobile devices, and CPU on desktop (fans spinning)
+- video source elements can include a mimetype which is good because the browser doesn't have to sniff the mimetype
 
 ## FOMS Day 2 - 10/16/2018
 
 ### Player Profiling
-    Examples:
-        - MUX bot-watcher: Spin-up a player and run tests
-            - https://github.com/muxinc/bot-watcher
-            - hls.js vs video.js hls (vhs)
-            - Results not posted (yet?)
-            - Video of Matt @ MUX https://www.youtube.com/watch?v=PWHvmvEgI4U&feature=youtu.be
-            - Uses puppeteer
-    Collaborating on Player Comparison
-    - What do we want to benchmark?
-        - mux at performance scale
-        - mux single view event timeline (EXAMPLE?)
-        - performance on specific clients and network conditions
-        - Map realworld data (internet throughput riding the train) to network throttling
-    - Each player will setup with the same video, same network conditions
-    - Define these scenarios (ACTION)
-    - Output these metrics...(ACTION)
-        - Viewer experience
-            - Rebuffering
-            - Uninterrupted playback
-            - Slow start up time
-            - Errors
-            - visual quality: start, average, max
-            - Quality switching: auto (ABR) vs manual (menu)
-            - Is the buffer evicted in either?
-    - How fast can you switch up?
-    - How slow can you switch down (close to the end of the buffer)?
-    - What do users want?
-    - What (AB) tests should players run - and what results would be good to share?
-            - Ignore events a user would not notice < 50ms (Performance API long task)
-        - Performance API metrics
-        - Page load time (up to player setup)
-    - Long task events
-    - Resource timings (number of resources, latency)
+Examples:
+- MUX bot-watcher: Spin-up a player and run tests
+	- https://github.com/muxinc/bot-watcher
+	- hls.js vs video.js hls (vhs)
+	- Results not posted (yet?)
+	- Video of Matt @ MUX https://www.youtube.com/watch?v=PWHvmvEgI4U&feature=youtu.be
+	- Uses puppeteer
+Collaborating on Player Comparison
+- What do we want to benchmark?
+	- mux at performance scale
+	- mux single view event timeline (EXAMPLE?)
+	- performance on specific clients and network conditions
+	- Map realworld data (internet throughput riding the train) to network throttling
+- Each player will setup with the same video, same network conditions
+- Define these scenarios (ACTION)
+- Output these metrics...(ACTION)
+	- Viewer experience
+		- Rebuffering
+		- Uninterrupted playback
+		- Slow start up time
+		- Errors
+		- visual quality: start, average, max
+		- Quality switching: auto (ABR) vs manual (menu)
+		- Is the buffer evicted in either?
+- How fast can you switch up?
+- How slow can you switch down (close to the end of the buffer)?
+- What do users want?
+- What (AB) tests should players run - and what results would be good to share?
+	- Ignore events a user would not notice < 50ms (Performance API long task)
+	- Performance API metrics
+	- Page load time (up to player setup)
+- Long task events
+- Resource timings (number of resources, latency)
         - Script loading size/time
         - Setup time
         - Upscale percentage: average, max
@@ -150,56 +150,56 @@
         - Isn't that more about content and QoE?
         - Features
         - Offline mode (pick a quality to watch later)
-    - What are the common player features we should include in benchmarking?
+- What are the common player features we should include in benchmarking?
         - media types: mp4, hls, dash
-    - What players can we benchmark? Sample/trial libraries
+- What players can we benchmark? Sample/trial libraries
         - video.js / Brightcove?
         - JW Player
             - Talk to Eric Boyd about developer edition
             - RW could share licensed library player 
-    Considerations
-    - Performance timing page load time (exclude or up to player setup/init)
-    - Video delivery and player delivery throttling. Tests should host all assets)
+Considerations
+- Performance timing page load time (exclude or up to player setup/init)
+- Video delivery and player delivery throttling. Tests should host all assets)
     
-    Real-world network traces
-    - allows us to throttle with realistic conditions
-    - paper: https://heim.ifi.uio.no/paalh/publications/files/mmsys2013-dataset.pdf
-    - dataset http://skuld.cs.umass.edu/traces/mmsys/2013/pathbandwidth/
-    - more data http://traces.cs.umass.edu/index.php/Mmsys/Mmsys
+Real-world network traces
+- allows us to throttle with realistic conditions
+- paper: https://heim.ifi.uio.no/paalh/publications/files/mmsys2013-dataset.pdf
+- dataset http://skuld.cs.umass.edu/traces/mmsys/2013/pathbandwidth/
+- more data http://traces.cs.umass.edu/index.php/Mmsys/Mmsys
     
-    Other notes
-        - Does quality switching cause drop-off?
-        - Quality menu usage is a good engagement signal
-        - Is it used because they don't like the current experience, or they simply want a specific quality
-    - API method chaining can impact performance (player.load().play() vs player.load().then(() => player.play())
-    - Chatted about code coverage tools and usage
+Other notes
+- Does quality switching cause drop-off?
+- Quality menu usage is a good engagement signal
+- Is it used because they don't like the current experience, or they simply want a specific quality
+- API method chaining can impact performance (player.load().play() vs player.load().then(() => player.play())
+- Chatted about code coverage tools and usage
     
-    SUMMARY
-    - Define player benchmark scenarios (ACTION)
-    - Define metrics ouput by running the test (ACTION)
-    - Make it easy to integrate a player with bot-watcher (ACTION)
-    - Throttle CPu, limit memory available, throttle or replay network conditions (ACTION)
-    - Speak with folks who are interested Flavio and Matt MMCC... Who would like to drive this as an open-source project?
+SUMMARY
+- Define player benchmark scenarios (ACTION)
+- Define metrics ouput by running the test (ACTION)
+- Make it easy to integrate a player with bot-watcher (ACTION)
+- Throttle CPu, limit memory available, throttle or replay network conditions (ACTION)
+- Speak with folks who are interested Flavio and Matt MMCC... Who would like to drive this as an open-source project?
 
 ### Frame accuracy
-    - Firefox can provide frame timestamp (behind a flag)
-    - WebGL Extension to provide information about which frame is being sent to the renderer
-    - Presumed framerate? VideoQuality API?
-    - Two proposals for frame tagging - which one can we standardize on?
-    - Use cases
+- Firefox can provide frame timestamp (behind a flag)
+- WebGL Extension to provide information about which frame is being sent to the renderer
+- Presumed framerate? VideoQuality API?
+- Two proposals for frame tagging - which one can we standardize on?
+- Use cases
         - What frame is rendered to a canvas for webGL rendering
         - current frame timecode (PTS or "number") timeOffset (per track) what time scale? Second doubles not good enough...
         - seek to next frame / paused frame by frame
         - frame accurate cues
-        - versions of currentTime, fastSeek(), duration, and the TimeRanges accessors, in frames
-    - W3C issue https://github.com/w3c/media-and-entertainment/issues/4
-    - Browser test https://daiz.github.io/frame-accurate-ish/
+	- versions of currentTime, fastSeek(), duration, and the TimeRanges accessors, in frames
+- W3C issue https://github.com/w3c/media-and-entertainment/issues/4
+- Browser test https://daiz.github.io/frame-accurate-ish/
 
 ### Autoplay
-    - breaking features or websites
+- breaking features or websites
         - Can a dialog be opened before putting policies like this into effect
             - Chrome WCG Intervention
-    - canAutoplay() API
+- canAutoplay() API
         - Window level vs video element
         - What constraints will be added besides audio, gesture, etc?
         - Safari can use it as a signal to not play/pause
