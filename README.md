@@ -16,7 +16,8 @@ Rob Walch - JW Player, Video Player
 #### iOS HLS hacks
 - parse M3U8 with performance.getEntriesByName to sync with Safari playback
 - "playImmediately(atRate rate: Float)" API https://developer.apple.com/documentation/avfoundation/avplayer/1643480-playimmediately
-- iOS supports video.startDate + video.currentTine
+- iOS supports `video.getStartDate() + video.currentTine`
+    - `video.getStartDate()` is invalid (`getTime() = NaN`) when PDT is not defined for first (all?) segment(s)
 
 #### iOS Radar Issues to File
 - MSE on iOS (memory efficient)
@@ -29,7 +30,7 @@ Rob Walch - JW Player, Video Player
 - Eject the back-buffer 30 seconds back (configurable, defaults to Infinty)
 - Increase the forward buffer length only when "waiting" events fire
 
-### MSE
+### MSE [Track 1, Session 1]
 - Feature
     - Chrome appendBuffer in a Worker
     - Buffer eviction / TimeRange change event notification
@@ -42,6 +43,15 @@ Rob Walch - JW Player, Video Player
             - Video tag `buffered` exposes coalesced ranges based on config
             - SourceBuffered `buffered` is the truth
     - `appendStream` pipe ReadableStream into SourceBuffer
+
+### Player Challenges [Track 1, Session 2]
+- Supporting IE11 / Windows 7 / Flash: End support 2020/1/1
+- Applications (pages) have their own service workers
+    - A player library like shaka must have hooks / APIs to setup background fetch to work with your app
+- Native players need offline storage. Web players do not.
+
+### Low Latency
+- Apple has no stance on the LHLS standard
 
 ### Video Element Extensibility
 - ServiceWorker
