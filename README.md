@@ -27,6 +27,9 @@ Rob Walch - JW Player, Video Player
     - X-Cue Out/In
 
 #### HLS.js TODO
+- Make HEAD (instead of GET) manifest requests, until you see a change, then:
+    - request all the content
+    - predict the next update based on when the header changed (etag)
 - Eject the back-buffer 30 seconds back (configurable, defaults to Infinty)
 - Increase the forward buffer length only when "waiting" events fire
 
@@ -52,17 +55,32 @@ Rob Walch - JW Player, Video Player
 
 ### Low Latency
 - Apple has no stance on the LHLS standard
-
-### Video Element Extensibility
-- ServiceWorker
+- John Bartos gave a great demo comparing LHLS to LL-DASH with latency target of 1-5 seconds
 
 ### QoE
 - Questions we need to answer
     - easy
-        - was my video visible?
+        - was my video visible* ?
+        - Did background tab affect performance?
+        - Spanial? observer
     - hard
+        - * was my video visible in an iframe
+            - IntersectionObserver is tricky (force an update?)
         - why is the player / page slow?
             - resources, long task
+        - get the framerate
+            - `video.getVideoPlaybackQuality().totalVideoFrames / video.played.end(0)`
+            - use frame accurate seeking to go to the next frame and check
+        
+- Conviva and Mux involved in CTA spec (Adobe has stepped in too)
+- TODO: Create issues on repo for properties and events that would be hard to track
+- TODO: Create a problem statement framerate (expose simple video fps) (*, 24, 29.*, 30, 48, 60, variable)
+
+### Tools
+- Media Lighthouse
+
+### Video Element Extensibility
+- ServiceWorker
 
 ### Media Stitching/Switching
 - What am I playing and what can I stitch in
