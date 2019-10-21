@@ -1,93 +1,75 @@
-# FOMS [East] March 2019
+# FOMS [SF] October 2019
 
-## Monday 3/4
+## Monday 11/21
 
 ### Position Statement
-Rob Walch - JW Player, Video Player
+Rob Walch - JW Player, Web Player Principal
 
-- Cross Browser/Device Compatibility
-    - MSE
-    - Metadata / TextTracks
-- Video Analytics
-- Web Application Performance
+- Low-Latency
+    - MSE v2 (codec transition)
+    - Bandwidth Estimation (+ABR)
+    - fetch in worker (which browser)
+    - LL Workflow
+        - fetch/xhr issue: H/2 byteranges never cached
+- Player Benchmarking
+    - Performance API (resoures, first paint, long task observers)
+    - Video playback quality
+- WebVTT / IMSC1
+- * MetaData (SCTE, DATERANGE, Cross-Browser)
+    - Frame accurate
+- Error Handling
+    - Specific segment (or url)
 
-### Notes
+### Lightning Talk: Will Law Common-Media-Client-Data
+- CTE spec for Player to tell CDN what it needs and how it's doing
+- TODO: get pics (urls) from phone
 
-#### iOS HLS hacks
-- parse M3U8 with performance.getEntriesByName to sync with Safari playback
-- "playImmediately(atRate rate: Float)" API https://developer.apple.com/documentation/avfoundation/avplayer/1643480-playimmediately
-- iOS supports `video.getStartDate() + video.currentTine`
-    - `video.getStartDate()` is invalid (`getTime() = NaN`) when PDT is not defined for first (all?) segment(s)
 
-#### iOS Radar Issues to File
-- MSE on iOS (memory efficient)
-- TextTrack metatdata for manifest tags
-    - Program Date Time
-    - DateRange
-    - X-Cue Out/In
+### MSE v2
 
-#### HLS.js TODO
-- Make HEAD (instead of GET) manifest requests, until you see a change, then:
-    - request all the content
-    - predict the next update based on when the header changed (etag)
-- Eject the back-buffer 30 seconds back (configurable, defaults to Infinty)
-- Increase the forward buffer length only when "waiting" events fire
+Wolz:
+- Main features (not yet available)
+    - MSE available in worker context
+        - ObjectUrl context creation in the Worker (pass it to main thread)
+        - need buffered and currentTime from BufferSource and MediaElement in main thread
+    - Chrome Origin trial this/next quarter
+    - Firefox / Safari to follow
+- API for standardizing interop around gaps
+    - https://github.com/w3c/media-source/issues/160
+    - allow gaps? on which tracks?
+        - minimum jump
+        - play-through
+    - pops with audio gaps
+    - Tell SourceBuffer how to deal with gaps (configure buffer)
+- Appending small amounts of data (frames)
+    - Chrome does 128k at a time
+    - Scheduling overhead
+    - Does byte-stream format have to be one mp4
+    - GOP based? Frame based
+    - Min playback buffer to player "canplay"?
+        - ~3 frames, 200ms audio in Chrome
+        - 2-3 seconds
+        - ~30 frame latency in Edge
+- Chrome latency hint
+    - Byte stream can say it's live to just play
+- Minimum playback buffer
+    - See Exo play when ready (load control determines "ready" or "canplay" / have future data or autoplay has enough)
+    - Shaka sets playbackRate to 0 to wait for more data
+- Auto EMSG data extraction
+    - using box parser sucks
+    - Add a SourceBuffer event please, sidx time offset
+    - Safari does it for ID3 emsg data
+- Other topics we didn't get to
+    - Infinate GOP GC
+    - Multi SourceBuffer
+    - new SourceBuffer no tag
+    
+### Talk: Eric @ Apple
 
-### MSE [Track 1, Session 1]
-- Feature
-    - Chrome appendBuffer in a Worker
-    - Buffer eviction / TimeRange change event notification
-    - Media memory limit getter / notifications (be aware of cap)
-    - Specify where all the keyframes are (couldn't you keep track of this?)
-    - Ability to play-through gaps
-        - Gap jumping
-        - Frame dropping on append issues...
-        - Change algorithm to only play through ranges with union of AV tracks
-            - Video tag `buffered` exposes coalesced ranges based on config
-            - SourceBuffered `buffered` is the truth
-    - `appendStream` pipe ReadableStream into SourceBuffer
+Eric 
 
-### Player Challenges [Track 1, Session 2]
-- Supporting IE11 / Windows 7 / Flash: End support 2020/1/1
-- Applications (pages) have their own service workers
-    - A player library like shaka must have hooks / APIs to setup background fetch to work with your app
-- Native players need offline storage. Web players do not.
 
-### Low Latency
-- Apple has no stance on the LHLS standard
-- John Bartos gave a great demo comparing LHLS to LL-DASH with latency target of 1-5 seconds
 
-### QoE
-- Questions we need to answer
-    - easy
-        - was my video visible* ?
-        - Did background tab affect performance?
-        - Spanial? observer
-    - hard
-        - * was my video visible in an iframe
-            - IntersectionObserver is tricky (force an update?)
-        - why is the player / page slow?
-            - resources, long task
-        - get the framerate
-            - `video.getVideoPlaybackQuality().totalVideoFrames / video.played.end(0)`
-            - use frame accurate seeking to go to the next frame and check
-        
-- Conviva and Mux involved in CTA spec (Adobe has stepped in too)
-- TODO: Create issues on repo for properties and events that would be hard to track
-- TODO: Create a problem statement framerate (expose simple video fps) (*, 24, 29.*, 30, 48, 60, variable)
+###
 
-### Tools
-- Media Lighthouse
-
-### Video Element Extensibility
-- ServiceWorker
-
-### Media Stitching/Switching
-- What am I playing and what can I stitch in
-
-### Media Capabilities
-- ...
-
-### Live
-- End-card standards (before/after event, event timings, single segment start card stitching)
-- Timing Src https://webtiming.github.io/timingsrc/
+Notes measure buffering length(s) at canplay across UAs
