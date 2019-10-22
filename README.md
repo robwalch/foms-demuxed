@@ -145,24 +145,54 @@ It's coming to Dev-Tools!
 ### Cross-platform, interop
 
 Interop issues
-- HLS Manifest metadata - patch coming to Safari Preview
-- MSE Buffer eviction
-    - New eviction policy proposal (in MSE v2)
-- setLiveSeekableRange needed when using native controls
-- Libraries for testing support on TVs
+
+- HLS Manifest metadata: DATERANGE tags not exposed in Safari as "metadata" TextTrack cues
+    - There's a patch coming to Safari Preview soon
+    - Need to verify SCTE data in DATERANGE tags with matching ids does not cause MediaElement error
+    - Need to verify cue time ranges when stream is missing PDT (even though streams with DATERANGE should require PROGRAM-DATE-TIME)
+- MSE Buffer eviction is problematic on TVs
+    - See new eviction policy proposal (in MSE v2)
+- `setLiveSeekableRange` needed when using native controls. Appending on certain platforms with duration `Infinity` can fail
+    - Which environments? Is there a bug filed for this?
+- Libraries for testing support on TVs:
     - https://www.cobalt.dev/
     - https://github.com/cta-wave/WMAS
 - EME crypto scheme detection
-- fetch in workers is well supported in recent Chrome
-    - Not in Safari
-    - Firefox?
-    - TVs... nah
+    - Coming soon
+- `fetch` in workers is supported
+    - Chrome yes
+    - Firefox yes
+    - Safari no
+    - TVs no
+    - Since client will need to support fetch inside and outside of the workers, should there be an example feature test for this?
+    - What about libraries that accept network filters or loaders as input on the main thread?
 - Only naive fullscreen on iOS
-- no more 360 video please
+    - Prevent players from offering an auto-rotate to fullscreen in portrait orientation (as in Youtube app and active viewable players in Android Chrome)
+- 360 video such a small use case but copying video context is still a huge challenge (WebGL, CORS)
 
-### Notes 
+
+## Tuesday 11/22
+
+### Community
+
+- How to improve attendence at local video-dev meetups
+- How to improve FOMS
+- How to make attendance more diverse
+
+### SCTE-35 Ad Breaks in Broadcast
+
+- Ad break start: barter, opportunity start: ads
+
+
+## Notes 
 
 - When do browsers start playback? Measure buffering length(s) at canplay across UAs
 - Eric @ Apple has a patch for inband manifest DateRange metadata
 - ArrayBufferBuffer spec
     (Iterable of ArrayBuffers that acts as a single ArrayBuffer to avoid concats/alloc)
+- TODO: elbar@peer5.com Peer5: Access to (or interface for both) HLS.js Loader and pLoader, registerNetwork
+   - shaka.net.NetworkingEngine.registerScheme(schemeId, requestCallback)
+   - Using the loader allows them to provide bandwidth estimate
+   - Provide a stable path even if undocumented for accessing hls.js and shaka
+   - Must be global context so it applies to all players
+- 
