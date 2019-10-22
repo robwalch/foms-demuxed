@@ -183,6 +183,28 @@ Interop issues
 
 - Ad break start: barter, opportunity start: ads
 
+### MediaCapabilities v2
+
+- Hardware decoder or not?
+    - `powerEfficient` bool indicates a hardware encoder or software decoding at small resolutions
+    - `powerEfficient` will return `true` when there is a lack of data
+- Multiple decoders?
+    - No. Would be a hack and not reliable or useful in the context of a single page.
+- EME discoverability?
+    - Shaka doesn't yet use MediaCapabilities
+    - It does have to pass video and audio capabilities "robustness" to EME to get a MediaKey ("robustness" used by Widevine will be deprecated)
+- RemotePlayback API is a pain for AirPlay
+    - How do you pick the right stream (url)? Requires out-of-band knowledge
+    - When an Apple device specified a remote AirPlay device, that device handles playback of urls
+        - `canPlay` may be wrong on the sender
+        - If using WebAudio API then bytes are sent across
+        - With MSE it's more complicated
+    - Sender MediaElement would not dispatch an "error" event
+    - Could maybe use the MediaElement Source element list
+        - How does one specify a source element for use with MSE (blob)?
+    - You can't change a url mid-stream, but could reload alternate SSAI'd stream urls
+- CPU Info
+    - CPU and GPU info is not necessarily helpful and not available for privacy reasons
 
 ## Notes 
 
@@ -195,4 +217,4 @@ Interop issues
    - Using the loader allows them to provide bandwidth estimate
    - Provide a stable path even if undocumented for accessing hls.js and shaka
    - Must be global context so it applies to all players
-- 
+
