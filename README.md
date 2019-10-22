@@ -23,8 +23,8 @@ Rob Walch - JW Player, Web Player Principal
 ### Lightning Talk: Will Law Common-Media-Client-Data
 
 - CTE spec for Player to tell CDN what it needs and how it's doing
-- TODO: get pics (urls) from phone
-
+![slide-1](IMG_0134.jpeg)
+![slide-2](IMG_0135.jpeg)
     *Coming soon: Common-Media-Server-Data
 
 ### MSE v2
@@ -182,6 +182,8 @@ Interop issues
 ### SCTE-35 Ad Breaks in Broadcast
 
 - Ad break start: barter, opportunity start: ads
+![slide-3](IMG_0136.jpeg)
+![slide-4](IMG_0137.jpeg)
 
 ### MediaCapabilities v2
 
