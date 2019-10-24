@@ -208,6 +208,63 @@ Interop issues
 - CPU Info
     - CPU and GPU info is not necessarily helpful and not available for privacy reasons
 
+# DEMUXED
+
+## Wednesday 11/23
+
+### NICK CHADWICK @MUX
+Super Resolution: The scaler of tomorrow, here today!
+
+### RYAN B HARVEY
+Modeling the conceptual structure of FFmpeg in JavaScript
+
+### SARAH ALLEN
+RTMP: web video innovation or Web 1.0 hack… how did we get to now?
+Sarah worked at Macromedia and Adobe on Director and Flash
+
+### ZACHARY CAVA
+Scalable Per-User Ad Insertion in Live OTT
+- DASH manifests allow for "wrapped" ad manifest patches
+
+### CHARLES SONIGO & JEAN-BAPTISTE LOUAZEL @ STREAMROOT
+Building an automated testing suite: How to gain confidence that your release will not break playback for any platform/player/OS/format combination (joint talk)
+
+## Thursday 11/24
+
+### Marina Kalkanis, M2A Media: Apple Low-Latency HLS
+Serving LL-HLS For DAZN Live Sporting Events
+
+- Features:
+    - Partial Segments
+    - Playlist Blocking (until refreshed with msn/part query request)
+    - Http/2 (Push part or segment with playlist msn/part query request)
+    - Delta Playlist (SKIP request)
+    - Rendition Report
+- Latency comparison
+    - Typical latency: ~6s segmenta x ~5 trips:
+        - encoder, origin, cache , CDN, client buffer
+    - LL latency: .23 x 5 = 1.6s
+- You may have multiple parts for a single GOP
+    - 8 parts with only 2 that are "INDEPENDENT=YES" (GOP key frames)
+    - 1.9s GOP to align with audio sample rate (48hz?)
+- Verify blocking, push, delta working properly
+    - Use session ids to help with login
+- Challenges
+    - HTTP/2 support (works great, but not supported everywhere)
+    - Players (Apple still changing spec)
+    - DVR
+
+### BEN DODSON: Analyzing Video Metrics like Richard Feynman
+Book: "What DO you care what other people think?"
+
+- Don't fool yourself
+- Even with high quantitative abilities, your biases limit your ability
+- Look at the Anscombe's quartet different data with same sample variance, mean, etc...
+    https://en.wikipedia.org/wiki/Anscombe%27s_quartet
+- Which percentage of users experience a p90 stall duration?
+- Have curiosity and a bit of luck (Ask if it's a valve.)
+
+
 ## Notes 
 
 - When do browsers start playback? Measure buffering length(s) at canplay across UAs
@@ -219,4 +276,7 @@ Interop issues
    - Using the loader allows them to provide bandwidth estimate
    - Provide a stable path even if undocumented for accessing hls.js and shaka
    - Must be global context so it applies to all players
-
+- smart-TV resources
+    - https://developer.samsung.com/tv/develop/specifications/web-engine-specifications
+    - https://developer.samsung.com/tv/develop/specifications/media-specifications
+    - https://developer.samsung.com/tv/develop/specifications/tv-model-groups
