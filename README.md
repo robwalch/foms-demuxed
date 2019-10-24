@@ -1,4 +1,5 @@
 # FOMS [SF] October 2019
+See schedule for more session notes http://www.foms-workshop.org/foms2019SF/pmwiki.php/Site/Schedule
 
 ## Monday 11/21
 
@@ -142,6 +143,9 @@ It's coming to Dev-Tools!
 - Eric: Don't worry about what's possible or what the underlying errors are
     - Identify the type of information that would be useful and make a proposal
     
+Additional Notes: https://docs.google.com/document/d/1BaxJtVFGFv9sLMT5UkM7g3KYo0OTOh54ptWQJ82qKNM/edit#heading=h.74gq3url0e1s
+(these are also available in FOMS http://www.foms-workshop.org/foms2019SF/pmwiki.php/Site/Schedule)
+
 ### Cross-platform, interop
 
 Interop issues
@@ -228,6 +232,7 @@ Scalable Per-User Ad Insertion in Live OTT
 
 ### CHARLES SONIGO & JEAN-BAPTISTE LOUAZEL @ STREAMROOT
 Building an automated testing suite: How to gain confidence that your release will not break playback for any platform/player/OS/format combination (joint talk)
+https://github.com/streamroot/dna-integration-samples
 
 ## Thursday 11/24
 
@@ -264,6 +269,20 @@ Book: "What DO you care what other people think?"
 - Which percentage of users experience a p90 stall duration?
 - Have curiosity and a bit of luck (Ask if it's a valve.)
 
+### TE-YUAN HUANG
+QoE Impact from Router Buffer sizing and Active Queue Management
+
+### STEVE ROBERTSON
+This talk is not really about JavaScript
+
+- dropped frames are not really caused by network conditions. dropped frames happen when:
+    - switching tabs
+    - audio and video tracks are not perfectly aligned
+    - other page/browser/os performance issues
+- don't change from the ideal path just because of dropped frames
+   
+### ASHUTOSH AGRAWAL
+Doing Server-Side Ad Insertion on Live Sports for 25.3M Concurrent Users 
 
 ## Notes 
 
