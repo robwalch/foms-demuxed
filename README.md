@@ -1,7 +1,7 @@
 # FOMS [SF] October 2019
 See schedule for more session notes http://www.foms-workshop.org/foms2019SF/pmwiki.php/Site/Schedule
 
-## Monday 11/21
+## Monday 10/21
 
 ### Position Statement
 Rob Walch - JW Player, Web Player Principal
@@ -175,7 +175,7 @@ Interop issues
 - 360 video such a small use case but copying video context is still a huge challenge (WebGL, CORS)
 
 
-## Tuesday 11/22
+## Tuesday 10/22
 
 ### Community
 
@@ -214,7 +214,7 @@ Interop issues
 
 # DEMUXED
 
-## Wednesday 11/23
+## Wednesday 10/23
 
 ### NICK CHADWICK @MUX
 Super Resolution: The scaler of tomorrow, here today!
@@ -234,7 +234,7 @@ Scalable Per-User Ad Insertion in Live OTT
 Building an automated testing suite: How to gain confidence that your release will not break playback for any platform/player/OS/format combination (joint talk)
 https://github.com/streamroot/dna-integration-samples
 
-## Thursday 11/24
+## Thursday 10/24
 
 ### Marina Kalkanis, M2A Media: Apple Low-Latency HLS
 Serving LL-HLS For DAZN Live Sporting Events
@@ -269,6 +269,9 @@ Book: "What DO you care what other people think?"
 - Which percentage of users experience a p90 stall duration?
 - Have curiosity and a bit of luck (Ask if it's a valve.)
 
+### LIGHTNING TALKS
+Check out the video-dev jokes session
+
 ### TE-YUAN HUANG
 QoE Impact from Router Buffer sizing and Active Queue Management
 
@@ -283,6 +286,74 @@ This talk is not really about JavaScript
    
 ### ASHUTOSH AGRAWAL
 Doing Server-Side Ad Insertion on Live Sports for 25.3M Concurrent Users 
+
+### WILL LAW
+Three Roads to Low-Latency
+    - DASH-LL
+    - LHLS
+    - Apple LL-HLS
+- Many commonalities
+- Differences
+    - LL-HLS has no CTE support
+    - Only LL-HLS descibes internal segment structure (INDEPENDENT=YES)
+TODO: Add image
+
+# Apple Low-Latency Discussion
+
+## Friday 10/25
+
+Organizers: Will Law and Josh Tidsbury
+
+Meeting minutes and agenda:
+https://docs.google.com/document/d/17Ckfq0mgZbD9T9UPyQ8Pk-envNXsVPZocLpKOYbA7as/
+
+24 hour test stream https://ll-hls-test.apple.com/master.m3u8
+
+Release Progress
+- Low-latency HLS is still in Beta
+- iOS 13.2 / macOS Catalina 10.15.1. Is a reasonable basis for testing
+- Still tuning Apple clients and collecting feedback on spec
+- Will (most likely) emerge from Beta in first half of 2020
+
+Key optimizations come with pipelining (init) segments in order (request at all once)
+- How do you measure throughput when pipelining? (Ignore individual requests and measure throughput end-to-end)
+
+Twitch LL-HLS / LHLS of round-trip comparison and analysis:
+https://docs.google.com/document/d/1UVraLyvcbzrU0Ygf9e7DPx9t0rEDoWFn_q2xdxUc-A0/edit
+
+Appendix A: CDN Tune-In:
+Age header is required in the spec
+But, if there is no Age header consider the playlist to be up-to-date?
+That will not be true for all (types of) HLS playlist (or cdn/server responses)
+Could the reference tools (or will the reference stream) add am Age header
+How about making a second blocking request for the next part to get in sync
+Guidelines for pipelining parts up to the first push playlist/part request
+A blocking request returned from cache is not up-to-date
+- the initial response could be as old as one target duration
+- this means the first blocking request could still come from cache (and not be up-to-date)
+
+Bad clients can create long-lasting negative responses if negative caching is not done correctly (or per spec)
+
+LL-LHLS playlist: Can we have it both ways? 
+
+HLS-IF? Can we create an industry forum that will guide the development of the spec and have Apple adopt work based on common sense
+So far we have:
+- DASH-IF
+- CTA-WAVE
+    - CMAF-IF
+    - https://github.com/cta-wave/R4WG20-QoE-Metrics
+    
+TODO: HLS.js roadmap for Low-Latency HLS features. Could we roll out support in phases? (some of this would depend on server/CDN support of server control and parts)
+- Server Control
+    - block reload
+    - can-skip delta playlists
+    - hold-back
+- Part Support
+    - CDN Tune-in / playlist sync and part-holdback pipelining
+    - byterange part requests
+        - multi-part range requests?
+- Rendition Report
+
 
 ## Notes 
 
