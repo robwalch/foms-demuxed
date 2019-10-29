@@ -9,11 +9,11 @@ Rob Walch - JW Player, Web Player Principal
 - Low-Latency
     - MSE v2 (codec transition)
     - Bandwidth Estimation (+ABR)
-    - fetch in worker (which browser)
+    - fetch in worker (which browsers support it)
     - LL Workflow
-        - fetch/xhr issue: H/2 byteranges never cached
+        - fetch/xhr issue: H/2 byte-ranges never cached
 - Player Benchmarking
-    - Performance Resource Timing (resoures, first paint, long task observers)
+    - Performance Resource Timing (resources, first paint, long task observers)
     - Video playback quality
 - WebVTT / IMSC1
 - * MetaData (SCTE, DATERANGE, Cross-Browser)
@@ -212,6 +212,9 @@ Interop issues
 - CPU Info
     - CPU and GPU info is not necessarily helpful and not available for privacy reasons
 
+### FOMS is a wrap!
+![foms-group-pic](foms-2019.jpeg)
+
 # DEMUXED
 
 ## Wednesday 10/23
@@ -321,6 +324,9 @@ Key optimizations come with pipelining (init) segments in order (request at all 
 Twitch LL-HLS / LHLS of round-trip comparison and analysis:
 https://docs.google.com/document/d/1UVraLyvcbzrU0Ygf9e7DPx9t0rEDoWFn_q2xdxUc-A0/edit
 
+ExoPlayer Low-latency live playback
+https://docs.google.com/document/d/1z9qwuP7ff9sf3DZboXnhEF9hzW3Ng5rfJVqlGn8N38k/
+
 Appendix A: CDN Tune-In:
 Age header is required in the spec
 But, if there is no Age header consider the playlist to be up-to-date?
@@ -353,6 +359,9 @@ TODO: HLS.js roadmap for Low-Latency HLS features. Could we roll out support in 
     - byterange part requests
         - multi-part range requests?
 - Rendition Report
+
+### Apple LL-HLS Workshop is a wrap!
+![hls-group-pic](apple-ll-workshop-2019.jpeg)
 
 
 ## Notes 
